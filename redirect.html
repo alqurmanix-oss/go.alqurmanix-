@@ -1,1 +1,335 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AQX | تحويل آمن</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 20px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, #203c50 0%, transparent 45%),
+        #101827;
+      color: #fff;
+      font-family: Arial, Tahoma, sans-serif;
+    }
+
+    .card {
+      width: min(100%, 460px);
+      padding: 30px 22px;
+      text-align: center;
+      border: 1px solid #34465b;
+      border-radius: 24px;
+      background: #1b293c;
+      box-shadow: 0 20px 60px #0006;
+    }
+
+    .logo {
+      color: #56d6c2;
+      font-size: 43px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .tag {
+      color: #c4d1df;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 27px 0 10px;
+      font-size: 23px;
+    }
+
+    .desc {
+      color: #b7c5d5;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .ad-space {
+      width: 100%;
+      min-height: 115px;
+      margin: 25px 0;
+      border: 1px dashed #53677e;
+      border-radius: 15px;
+    }
+
+    .timer {
+      width: 116px;
+      height: 116px;
+      margin: 25px auto;
+      border: 6px solid #56d6c2;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 43px;
+      font-weight: bold;
+      color: #56d6c2;
+    }
+
+    .status {
+      min-height: 48px;
+      margin-top: 12px;
+      color: #dce7f2;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .error {
+      color: #ff8585;
+    }
+
+    .footer {
+      margin-top: 25px;
+      color: #8192a6;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <div class="logo">AQX</div>
+
+    <div class="tag">
+      اختصر برابطك، واستعلم برابطك أو رمزك فقط.
+    </div>
+
+    <h1>جاري تجهيز رابطك</h1>
+
+    <div class="desc">
+      يرجى الانتظار قليلًا، سيتم تحويلك تلقائيًا.
+    </div>
+
+    <div class="ad-space" aria-label="مساحة فارغة"></div>
+
+    <div class="timer" id="timer">…</div>
+
+    <div class="status" id="status" aria-live="polite">
+      جارٍ الاتصال بمحرك AQX...
+    </div>
+
+    <div class="footer">
+      AQX Engine · Secure Redirect
+    </div>
+  </main>
+
+  <script>
+    "use strict";
+
+    // إعدادات محرك AQX
+    const API_BASE =
+      "https://vuszqzgldbsscuxdfhdz.supabase.co/functions/v1/aqx-engine";
+
+    const PUBLIC_KEY =
+      "sb_publishable_cI7C0sL9M4OLvsa-JGAAFQ_KfqlkI7X";
+
+    const timerElement = document.getElementById("timer");
+    const statusElement = document.getElementById("status");
+
+    let finished = false;
+
+    // استخراج رمز الرابط من المسار /r/CODE
+    function getShortCode() {
+      const path = window.location.pathname;
+      const match = path.match(/\/r\/([A-Za-z0-9_-]{3,64})\/?$/);
+
+      if (match) {
+        return match[1];
+      }
+
+      // يسمح بالاختبار باستخدام ?code=CODE
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+
+      if (code && /^[A-Za-z0-9_-]{3,64}$/.test(code)) {
+        return code;
+      }
+
+      return null;
+    }
+
+    function showError(message) {
+      finished = true;
+      timerElement.textContent = "!";
+      statusElement.textContent = message;
+      statusElement.className = "status error";
+    }
+
+    async function apiRequest(endpoint, body) {
+      const response = await fetch(API_BASE + endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": PUBLIC_KEY
+        },
+        body: JSON.stringify(body),
+        cache: "no-store",
+        redirect: "error"
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      return {
+        ok: response.ok,
+        status: response.status,
+        data
+      };
+    }
+
+    // بدء جلسة انتظار موثقة على الخادم
+    async function startSession(code) {
+      const result = await apiRequest("/redirect/start", {
+        code: code
+      });
+
+      if (
+        !result.ok ||
+        !result.data.ok ||
+        typeof result.data.session_id !== "string" ||
+        !Number.isInteger(result.data.wait_seconds) ||
+        result.data.wait_seconds < 0
+      ) {
+        throw new Error(
+          result.data.message || "تعذر إنشاء جلسة التحويل."
+        );
+      }
+
+      return result.data;
+    }
+
+    // طلب إتمام الجلسة. الخادم يتحقق من الوقت بنفسه.
+    async function completeSession(sessionId) {
+      const result = await apiRequest("/redirect/complete", {
+        session_id: sessionId
+      });
+
+      if (
+        result.ok &&
+        result.data.ok &&
+        typeof result.data.redirect_url === "string"
+      ) {
+        const destination = new URL(result.data.redirect_url);
+
+        if (
+          destination.protocol !== "https:" &&
+          destination.protocol !== "http:"
+        ) {
+          throw new Error("وجهة التحويل غير صالحة.");
+        }
+
+        finished = true;
+        statusElement.textContent = "تم التحقق، جارٍ تحويلك الآن...";
+        timerElement.textContent = "✓";
+
+        window.location.replace(destination.href);
+        return;
+      }
+
+      // قد يصل طلب الإكمال قبل الموعد بقليل بسبب فرق التوقيت.
+      if (
+        result.status === 403 &&
+        result.data.error === "wait_not_finished"
+      ) {
+        const remaining = Number(result.data.remaining_seconds);
+
+        if (Number.isFinite(remaining) && remaining > 0) {
+          timerElement.textContent = String(Math.ceil(remaining));
+          statusElement.textContent =
+            "جارٍ استكمال التحقق من مدة الانتظار...";
+
+          await new Promise(resolve =>
+            setTimeout(resolve, Math.min(remaining * 1000, 30000))
+          );
+
+          return completeSession(sessionId);
+        }
+      }
+
+      throw new Error(
+        result.data.message || "تعذر إتمام جلسة التحويل."
+      );
+    }
+
+    // عداد العرض فقط؛ ليس وسيلة للتحايل على تحقق الخادم.
+    async function runCountdown(session) {
+      let remaining = session.wait_seconds;
+
+      timerElement.textContent = String(remaining);
+
+      if (remaining === 0) {
+        statusElement.textContent =
+          "جارٍ التحقق من جلسة التحويل...";
+        return completeSession(session.session_id);
+      }
+
+      statusElement.textContent =
+        "يرجى الانتظار حتى انتهاء العد التنازلي.";
+
+      const deadline = performance.now() + remaining * 1000;
+
+      while (remaining > 0 && !finished) {
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        const millisecondsLeft = Math.max(
+          0,
+          deadline - performance.now()
+        );
+
+        const nextValue = Math.ceil(millisecondsLeft / 1000);
+
+        if (nextValue !== remaining) {
+          remaining = nextValue;
+          timerElement.textContent = String(remaining);
+        }
+      }
+
+      if (finished) return;
+
+      timerElement.textContent = "✓";
+      statusElement.textContent =
+        "انتهى العد، جارٍ التحقق من الخادم...";
+
+      await completeSession(session.session_id);
+    }
+
+    async function initialize() {
+      try {
+        const code = getShortCode();
+
+        if (!code) {
+          throw new Error("رمز الرابط غير صالح أو غير موجود.");
+        }
+
+        const session = await startSession(code);
+
+        await runCountdown(session);
+
+      } catch (error) {
+        showError(
+          error && error.message
+            ? error.message
+            : "حدث خطأ أثناء الاتصال بمحرك AQX."
+        );
+      }
+    }
+
+    initialize();
+  </script>
+</body>
+</html>
+
