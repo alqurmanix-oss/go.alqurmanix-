@@ -1,632 +1,1117 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#081326">
-  <meta name="description" content="AQX - اختصر روابطك بسهولة وسرعة، واحصل على رابط مختصر ورمز خاص للاستعلام عن الإحصائيات.">
-  <title>AQX | اختصر روابطك بذكاء</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob: data:; connect-src https://vuszqzgldbsscuxdfhdz.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2a1070">
+  <meta name="color-scheme" content="light">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="AQX - اختصر روابطك بسهولة وأمان، واحصل على رابط مختصر ورمز خاص للاستعلام عن الإحصائيات.">
+  <meta property="og:title" content="AQX | اختصر روابطك بسهولة وأمان">
+  <meta property="og:description" content="روابط قصيرة احترافية مع إحصائيات دقيقة وأداء فائق السرعة.">
+  <meta property="og:type" content="website">
+  <title>AQX | اختصر روابطك بسهولة وأمان</title>
+
+  <!-- أيقونة المتصفح (مدمجة داخل الكود) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b6cf0'/%3E%3Cstop offset='1' stop-color='%233a1c9f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M18 46 30 16h4l12 30h-6l-2.6-7H26.6L24 46zm10.6-12h6.8L32 24.6z' fill='%23fff'/%3E%3Cpath d='M44 12l8-2-2 8z' fill='%23ffd36b'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%233a1c9f'/%3E%3Cpath d='M18 46 30 16h4l12 30h-6l-2.6-7H26.6L24 46zm10.6-12h6.8L32 24.6z' fill='%23fff'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- حماية من التضمين داخل إطار (Clickjacking) -->
+  <style>html.framed body{display:none!important}</style>
+  <script>
+    (function () {
+      if (window.top !== window.self) {
+        document.documentElement.className += " framed";
+        try { window.top.location = window.self.location.href; } catch (e) {}
+      }
+    })();
+  </script>
 
   <style>
-    :root {
-      --bg: #081326;
-      --panel: #101f36;
-      --panel2: #142640;
-      --border: rgba(148, 181, 218, .16);
-      --text: #f5f8ff;
-      --muted: #a9b9ce;
-      --cyan: #50e1d0;
-      --blue: #5d9cff;
-      --danger: #ff7777;
-      --success: #62e6ad;
+    :root{
+      --ink:#1b0a4d; --ink2:#2b1a78; --text:#2a1a5e; --soft:#3a2d70;
+      --p1:#2a1070; --p2:#43219f; --p3:#6a3de0; --p4:#8b6cf0;
+      --lav:#e9e3ff; --lav2:#d9d0ff; --gold:#ffc83d;
+      --glass:rgba(255,255,255,.58); --glass-b:rgba(255,255,255,.9);
+      --shadow:0 20px 60px rgba(74,36,181,.18);
     }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;color:var(--text);overflow-x:hidden;
+      font-family:'Cairo',Tahoma,Arial,sans-serif;
       background:
-        radial-gradient(ellipse at 15% 5%, rgba(38, 128, 178, .2), transparent 38%),
-        radial-gradient(ellipse at 90% 45%, rgba(61, 90, 180, .15), transparent 40%),
-        var(--bg);
-      font-family: Tahoma, Arial, sans-serif;
+        radial-gradient(ellipse 60% 45% at 8% 22%,rgba(139,108,240,.55),transparent 70%),
+        radial-gradient(ellipse 55% 40% at 95% 30%,rgba(190,170,255,.55),transparent 70%),
+        radial-gradient(ellipse 70% 40% at 50% 100%,rgba(139,108,240,.35),transparent 70%),
+        linear-gradient(180deg,#e4dcff 0%,#efeaff 45%,#e7e0ff 100%);
+      background-attachment:fixed;
     }
+    button,input{font:inherit}
+    a{color:inherit;text-decoration:none}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .wrap{width:min(1360px,94%);margin-inline:auto}
+    svg.ico{width:1em;height:1em;display:inline-block;vertical-align:middle;flex-shrink:0}
 
-    button, input { font: inherit; }
+    /* ===== زخارف الخلفية ===== */
+    .bg-blob{position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none}
+    .bg-blob.a{width:520px;height:520px;right:-140px;top:180px;background:radial-gradient(circle,rgba(255,255,255,.7),rgba(255,255,255,0) 68%)}
+    .bg-blob.b{width:420px;height:420px;left:34%;top:240px;background:radial-gradient(circle,rgba(160,130,250,.28),transparent 68%)}
 
-    .container {
-      width: min(1100px, 92%);
-      margin: auto;
+    /* ===== الهيدر ===== */
+    header{padding:0 0 4px;position:relative;z-index:30}
+    .bar{
+      height:92px;border-radius:0 0 60px 60px;position:relative;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 22px;
+      background:linear-gradient(100deg,#2a1070 0%,#3d1c97 55%,#5a30c8 100%);
+      box-shadow:0 18px 50px rgba(42,16,112,.35),inset 0 -1px 0 rgba(255,255,255,.12);
+      width:min(1345px,94%);margin-inline:auto;
     }
-
-    header {
-      padding: 24px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
+    .bar::before,.bar::after{content:"";position:absolute;pointer-events:none;border-radius:50%}
+    .bar::before{left:-60px;top:-120px;width:360px;height:330px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 65%)}
+    .bar::after{right:-30px;top:-70px;width:340px;height:340px;border:1px solid rgba(255,255,255,.1);box-shadow:0 0 0 38px rgba(255,255,255,.035)}
+    .cta-top{
+      position:relative;z-index:2;display:flex;align-items:center;gap:10px;cursor:pointer;
+      padding:13px 22px;border-radius:30px;border:1px solid rgba(255,255,255,.1);color:#fff;font-weight:800;font-size:17px;
+      background:rgba(18,6,60,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.12);transition:.25s
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 29px;
-      font-weight: 900;
-      letter-spacing: 1px;
+    .cta-top .ico{color:var(--gold);font-size:22px}
+    .cta-top:hover{background:rgba(18,6,60,.8);transform:translateY(-2px)}
+    nav{position:relative;z-index:2;display:flex;align-items:center;gap:34px}
+    nav a{
+      display:flex;align-items:center;gap:9px;color:#fff;font-weight:700;font-size:17px;padding:8px 2px;position:relative;opacity:.95;transition:.2s
     }
+    nav a .ico{font-size:22px}
+    nav a:hover{opacity:1;transform:translateY(-1px)}
+    nav a.active::after{content:"";position:absolute;inset-inline:0;bottom:-8px;height:3px;border-radius:3px;background:#fff;box-shadow:0 0 12px rgba(255,255,255,.8)}
+    .logo{position:relative;z-index:2;direction:ltr;display:flex;flex-direction:column;align-items:flex-start;line-height:1;color:#fff;user-select:none}
+    .logo b{font-family:'Cairo',sans-serif;font-style:italic;font-weight:900;font-size:56px;letter-spacing:-1px;text-shadow:0 4px 18px rgba(0,0,0,.35);display:flex;align-items:flex-start}
+    .logo b svg{width:56px;height:56px;margin-left:-4px;margin-top:-8px;transform:rotate(8deg)}
+    .logo small{font-size:14px;font-weight:600;margin-top:-4px;margin-left:92px;opacity:.95;letter-spacing:.2px}
+    .nav-toggle{display:none;position:relative;z-index:3;width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:24px}
 
-    .brand-icon {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      color: #061526;
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      box-shadow: 0 8px 30px #50e1d044;
+    /* ===== الهيرو ===== */
+    .hero{position:relative;display:grid;grid-template-columns:1fr;min-height:560px;padding-top:26px}
+    .hero-text{width:min(63%,880px);margin-right:0;position:relative;z-index:3;padding-top:18px}
+    h1{margin:0;font-weight:900;color:var(--ink);font-size:clamp(46px,6.1vw,92px);line-height:1.18;letter-spacing:-1px}
+    .swoosh{display:block;width:min(340px,48%);height:22px;margin:-2px 0 0;margin-right:-6px}
+    .sub{margin:14px 0 0;font-size:clamp(17px,1.5vw,23px);font-weight:600;line-height:1.85;color:var(--text);max-width:640px}
+    .art{position:absolute;left:0;top:0;width:min(49%,690px);z-index:1;pointer-events:none}
+    .art svg{width:100%;height:auto;display:block;overflow:visible}
+    .art .float{animation:floaty 6s ease-in-out infinite}
+    .art .float2{animation:floaty 5s ease-in-out -2s infinite}
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+    /* حقل الإدخال */
+    .shorten{position:relative;z-index:4;margin-top:34px;width:min(1000px,100%);}
+    .barform{
+      display:flex;align-items:center;gap:10px;padding:9px;border-radius:44px;
+      background:linear-gradient(180deg,#fff,#f6f2ff);border:3px solid rgba(255,255,255,.95);
+      box-shadow:0 0 0 6px rgba(255,255,255,.4),0 24px 60px rgba(74,36,181,.22);
+      transition:box-shadow .25s
     }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0;
-      margin-top: 3px;
+    .barform:focus-within{box-shadow:0 0 0 6px rgba(139,108,240,.35),0 24px 60px rgba(74,36,181,.28)}
+    .go{
+      flex-shrink:0;display:flex;align-items:center;gap:10px;cursor:pointer;border:0;color:#fff;font-weight:800;font-size:20px;
+      padding:0 36px;height:58px;border-radius:32px;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,#3a1c9f,#5b2fd0 60%,#6a3de0);box-shadow:0 10px 26px rgba(74,36,181,.45),inset 0 1px 0 rgba(255,255,255,.3);
+      transition:.25s
     }
-
-    .header-tag {
-      border: 1px solid var(--border);
-      background: #ffffff08;
-      padding: 10px 15px;
-      border-radius: 30px;
-      color: var(--cyan);
-      font-size: 12px;
+    .go .ico{color:var(--gold);font-size:24px}
+    .go::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(120%);transition:transform .7s}
+    .go:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(74,36,181,.55)}
+    .go:hover::after{transform:translateX(-120%)}
+    .go:active{transform:scale(.97)}
+    .go:disabled{opacity:.7;cursor:wait;transform:none}
+    .go .spin{display:none;width:22px;height:22px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:rot .8s linear infinite}
+    .go.loading .spin{display:block}.go.loading .ico{display:none}
+    @keyframes rot{to{transform:rotate(360deg)}}
+    #originalUrl{
+      flex:1;min-width:0;height:58px;border:0;outline:0;background:transparent;padding:0 12px;
+      color:var(--ink);font-size:19px;font-weight:600;direction:rtl;text-align:start;unicode-bidi:plaintext
     }
+    #originalUrl::placeholder{color:#8f84b4;font-weight:500}
+    .lnk{flex-shrink:0;width:50px;height:50px;display:grid;place-items:center;color:#5b2fd0;font-size:30px;margin-inline-start:4px}
+    .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+    .msg{display:none;margin:14px 10px 0;padding:12px 18px;border-radius:16px;font-weight:700;font-size:15px;line-height:1.8}
+    .msg.error{display:block;color:#a61b3a;background:rgba(255,255,255,.85);border:1px solid rgba(214,60,90,.35);box-shadow:0 8px 24px rgba(214,60,90,.12)}
+    .msg.info{display:block;color:#43219f;background:rgba(255,255,255,.85);border:1px solid rgba(91,47,208,.3)}
 
-    .hero {
-      text-align: center;
-      padding: 68px 0 35px;
+    /* ===== شريط المزايا ===== */
+    .perks{display:grid;grid-template-columns:repeat(4,1fr);margin:36px 0 34px;position:relative;z-index:3}
+    .perk{display:flex;align-items:center;gap:16px;padding:6px 26px;position:relative}
+    .perk:not(:first-child)::before{content:"";position:absolute;inset-inline-start:0;top:8px;bottom:8px;width:1px;background:linear-gradient(transparent,rgba(110,80,200,.35),transparent)}
+    .perk-ico{
+      width:66px;height:66px;border-radius:20px;display:grid;place-items:center;font-size:32px;color:#4a24b5;flex-shrink:0;
+      background:linear-gradient(145deg,#fff,#d8d0ff 60%,#c7bbff);box-shadow:0 10px 24px rgba(91,47,208,.22),inset 0 1px 0 #fff
     }
+    .perk h3{margin:0;font-size:19px;font-weight:800;color:var(--ink2);line-height:1.5}
+    .perk h3 span{display:block;font-weight:600;color:var(--soft)}
 
-    .eyebrow {
-      display: inline-block;
-      color: var(--cyan);
-      border: 1px solid #50e1d044;
-      background: #50e1d00c;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 13px;
+    /* ===== الكروت ===== */
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;position:relative;z-index:3}
+    .card{
+      position:relative;display:flex;flex-direction:column;padding:26px 24px 22px;border-radius:30px;min-height:228px;overflow:hidden;
+      background:linear-gradient(160deg,rgba(255,255,255,.78),rgba(255,255,255,.42));border:1px solid var(--glass-b);
+      box-shadow:var(--shadow),inset 0 1px 0 #fff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      transition:transform .35s,box-shadow .35s
     }
-
-    h1 {
-      font-size: clamp(34px, 6vw, 58px);
-      line-height: 1.3;
-      margin: 23px 0 14px;
-      font-weight: 900;
+    .card::before{content:"";position:absolute;width:200px;height:200px;border-radius:50%;left:-60px;top:-70px;background:radial-gradient(circle,rgba(139,108,240,.22),transparent 70%)}
+    .card:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(74,36,181,.28),inset 0 1px 0 #fff}
+    .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex:1}
+    .card-text{flex:1;position:relative}
+    .card h3{margin:2px 0 8px;font-size:24px;font-weight:900;color:var(--ink2)}
+    .card p{margin:0;font-size:15px;font-weight:600;line-height:1.85;color:var(--soft)}
+    .card-art{width:112px;flex-shrink:0;position:relative}
+    .card-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 12px 14px rgba(74,36,181,.25))}
+    .card .more{
+      margin-top:16px;display:flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;border-radius:22px;
+      font-weight:800;font-size:16px;color:var(--ink2);background:linear-gradient(180deg,#e3dbff,#d2c7ff);
+      border:1px solid rgba(255,255,255,.9);box-shadow:0 6px 16px rgba(91,47,208,.15);transition:.25s
     }
+    .card .more .ico{font-size:18px}
+    .card .more:hover{background:linear-gradient(135deg,#4a24b5,#6a3de0);color:#fff;transform:translateY(-2px)}
 
-    h1 span {
-      background: linear-gradient(90deg, var(--cyan), #83baff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    /* ===== البانر السفلي ===== */
+    .banner{
+      margin:34px auto 40px;height:92px;border-radius:50px;position:relative;overflow:hidden;z-index:3;
+      display:flex;align-items:center;justify-content:center;gap:40px;padding:0 40px;
+      background:linear-gradient(100deg,#4a24b5,#6a35e0 50%,#4a24b5);color:#fff;
+      box-shadow:0 22px 56px rgba(74,36,181,.4),inset 0 1px 0 rgba(255,255,255,.25)
     }
-
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: var(--muted);
-      line-height: 2;
-      font-size: 16px;
+    .banner::before,.banner::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+    .banner::before{left:-60px;top:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 65%)}
+    .banner::after{right:-40px;bottom:-110px;width:300px;height:300px;box-shadow:0 0 0 30px rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+    .banner .trophy{width:70px;position:relative;z-index:1;filter:drop-shadow(0 8px 14px rgba(0,0,0,.3))}
+    .banner h2{margin:0;font-size:clamp(20px,2.4vw,34px);font-weight:800;position:relative;z-index:1;white-space:nowrap}
+    .banner h2 em{font-style:italic;font-weight:900;font-size:1.15em;letter-spacing:.5px;direction:ltr;display:inline-block}
+    .banner h2 u{display:block;height:2px;width:70%;margin:2px auto 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);text-decoration:none}
+    .banner .start{
+      position:relative;z-index:1;display:flex;align-items:center;gap:10px;padding:0 30px;height:52px;border-radius:30px;cursor:pointer;
+      font-weight:800;font-size:18px;color:var(--ink2);background:linear-gradient(180deg,#f1ecff,#d9d0ff);
+      border:2px solid rgba(255,255,255,.9);box-shadow:0 10px 24px rgba(0,0,0,.2);transition:.25s
     }
+    .banner .start .ico{color:#5b2fd0;font-size:20px}
+    .banner .start:hover{transform:translateY(-3px) scale(1.03)}
 
-    .workspace {
-      width: min(720px, 100%);
-      margin: 28px auto 0;
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      background: linear-gradient(145deg, #142640ee, #0d1b30ee);
-      box-shadow: 0 25px 80px #0005;
-      text-align: right;
+    /* ===== زر الصوت ===== */
+    .mute{
+      position:fixed;left:18px;bottom:18px;z-index:40;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.9);cursor:pointer;
+      background:linear-gradient(145deg,#fff,#e3dbff);color:#4a24b5;font-size:24px;display:grid;place-items:center;box-shadow:0 10px 28px rgba(74,36,181,.3);transition:.25s
     }
+    .mute:hover{transform:scale(1.08)}
+    .mute .off{display:none}.mute.is-off .on{display:none}.mute.is-off .off{display:block}
 
-    .field { margin-bottom: 20px; }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 14px;
-      font-weight: bold;
+    /* ===== نافذة النجاح ===== */
+    .overlay{
+      position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px;
+      background:radial-gradient(circle at 50% 30%,rgba(106,61,224,.55),rgba(14,4,50,.85));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)
     }
-
-    .optional {
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: normal;
+    .overlay.show{display:flex;animation:fadeIn .35s ease}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal{
+      position:relative;width:min(600px,100%);max-height:94vh;overflow:auto;border-radius:36px;padding:38px 32px 28px;text-align:center;
+      background:linear-gradient(165deg,#ffffff 0%,#f3eeff 55%,#e7deff 100%);
+      border:2px solid rgba(255,255,255,.95);
+      box-shadow:0 0 0 8px rgba(255,255,255,.12),0 40px 120px rgba(20,4,70,.65),0 0 90px rgba(139,108,240,.55);
+      animation:pop .6s cubic-bezier(.2,1.3,.3,1)
     }
-
-    input {
-      width: 100%;
-      min-height: 55px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 14px 16px;
-      outline: none;
-      color: white;
-      background: #071426;
-      direction: ltr;
-      text-align: left;
-      transition: .2s;
+    @keyframes pop{0%{transform:scale(.7) translateY(40px);opacity:0}100%{transform:none;opacity:1}}
+    .modal::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at 50% -10%,rgba(139,108,240,.35),transparent 55%)}
+    #confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;border-radius:inherit}
+    .modal>*:not(#confetti){position:relative;z-index:1}
+    .x{position:absolute!important;top:16px;inset-inline-start:16px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(91,47,208,.2);background:#fff;color:#4a24b5;font-size:20px;cursor:pointer;display:grid;place-items:center;z-index:3;transition:.2s}
+    .x:hover{background:#4a24b5;color:#fff;transform:rotate(90deg)}
+    .tick{width:112px;height:112px;margin:0 auto 14px;position:relative}
+    .tick::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,rgba(98,230,173,.4),transparent 68%);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{transform:scale(.92);opacity:.8}50%{transform:scale(1.12);opacity:1}}
+    .tick svg{width:100%;height:100%;position:relative;overflow:visible}
+    .tick .ring{stroke-dasharray:320;stroke-dashoffset:320;animation:draw .8s .15s ease forwards}
+    .tick .chk{stroke-dasharray:80;stroke-dashoffset:80;animation:draw .5s .75s ease forwards}
+    @keyframes draw{to{stroke-dashoffset:0}}
+    .modal h2{margin:6px 0 4px;font-size:30px;font-weight:900;color:var(--ink)}
+    .modal .lead{margin:0 0 22px;color:var(--soft);font-weight:600;font-size:16px}
+    .field-box{margin-bottom:16px;text-align:right}
+    .field-box .lbl{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:800;font-size:14px;color:var(--ink2)}
+    .field-box .lbl .ico{color:#6a3de0;font-size:18px}
+    .copyrow{display:flex;gap:8px;align-items:stretch}
+    .val{
+      flex:1;min-width:0;padding:14px 16px;border-radius:16px;background:#fff;border:1.5px solid rgba(139,108,240,.4);
+      color:#3a1c9f;font-weight:800;font-size:17px;direction:ltr;text-align:left;overflow-wrap:anywhere;user-select:all;line-height:1.6;
+      box-shadow:inset 0 2px 8px rgba(74,36,181,.07)
     }
-
-    input:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 0 3px #50e1d018;
+    .val.code{letter-spacing:1.5px;font-family:'Courier New',monospace;font-size:19px}
+    .cp{
+      flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 20px;border-radius:16px;border:0;cursor:pointer;color:#fff;font-weight:800;font-size:15px;
+      background:linear-gradient(135deg,#3a1c9f,#6a3de0);box-shadow:0 8px 20px rgba(74,36,181,.35);transition:.25s
     }
-
-    input::placeholder { color: #72849c; }
-
-    .hint {
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.8;
-      margin-top: 8px;
+    .cp:hover{transform:translateY(-2px)}
+    .cp.done{background:linear-gradient(135deg,#17a673,#3ed89c)}
+    .howto{
+      margin:20px 0 18px;padding:16px 18px;border-radius:20px;text-align:right;
+      background:linear-gradient(145deg,rgba(139,108,240,.14),rgba(139,108,240,.06));border:1px dashed rgba(91,47,208,.4)
     }
+    .howto h4{margin:0 0 8px;font-size:16px;font-weight:900;color:var(--ink2);display:flex;align-items:center;gap:8px}
+    .howto h4 .ico{color:#6a3de0;font-size:20px}
+    .howto p{margin:0 0 6px;font-size:14px;font-weight:600;line-height:1.9;color:var(--soft)}
+    .howto ol{margin:6px 0 0;padding-inline-start:22px;font-size:14px;font-weight:700;color:#3a1c9f;line-height:2}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .actions>*{flex:1 1 150px;display:flex;align-items:center;justify-content:center;gap:9px;height:52px;border-radius:18px;cursor:pointer;font-weight:800;font-size:16px;transition:.25s;border:0}
+    .btn-q{color:#fff;background:linear-gradient(135deg,#3a1c9f,#6a3de0);box-shadow:0 10px 24px rgba(74,36,181,.4)}
+    .btn-s{color:var(--ink2);background:linear-gradient(180deg,#f1ecff,#d9d0ff);border:1px solid #fff!important}
+    .btn-c{color:#a61b3a;background:#fff;border:1.5px solid rgba(214,60,90,.35)!important}
+    .actions>*:hover{transform:translateY(-3px)}
 
-    .primary {
-      width: 100%;
-      min-height: 58px;
-      border: 0;
-      border-radius: 14px;
-      color: #071629;
-      font-weight: 900;
-      font-size: 17px;
-      cursor: pointer;
-      background: linear-gradient(100deg, var(--cyan), #80baff);
-      box-shadow: 0 10px 28px #50e1d022;
-      transition: .2s;
+    .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);z-index:200;padding:12px 22px;border-radius:30px;background:#2a1070;color:#fff;font-weight:700;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+    .toast.show{opacity:1;transform:translateX(-50%)}
+
+    /* ظهور تدريجي */
+    .rise{opacity:0;transform:translateY(26px);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
+    @keyframes rise{to{opacity:1;transform:none}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}.tick .ring,.tick .chk{stroke-dashoffset:0}}
+
+    /* ===== الاستجابة ===== */
+    @media(max-width:1180px){
+      nav{gap:20px}nav a{font-size:15px}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .perks{grid-template-columns:repeat(2,1fr);row-gap:22px}
+      .perk:nth-child(3)::before{display:none}
     }
-
-    .primary:hover { transform: translateY(-2px); }
-    .primary:disabled { opacity: .55; cursor: wait; transform: none; }
-
-    .message {
-      display: none;
-      margin-top: 17px;
-      padding: 13px;
-      border-radius: 12px;
-      line-height: 1.8;
-      font-size: 13px;
+    @media(max-width:960px){
+      .nav-toggle{display:grid;place-items:center}
+      nav{position:absolute;top:84px;inset-inline:14px;flex-direction:column;align-items:stretch;gap:2px;padding:12px;border-radius:24px;
+        background:linear-gradient(160deg,#2a1070,#4a24b5);box-shadow:0 24px 50px rgba(20,4,70,.5);display:none}
+      nav.open{display:flex;animation:fadeIn .25s}
+      nav a{padding:14px 16px;border-radius:14px}nav a:hover{background:rgba(255,255,255,.1)}nav a.active::after{display:none}
+      .cta-top{display:none}
+      .bar{border-radius:0 0 40px 40px}
+      .hero{min-height:0}
+      .hero-text{width:100%}
+      .art{position:relative;width:min(560px,100%);margin:10px auto -10px;order:2;left:auto}
+      .hero{display:flex;flex-direction:column}
+      .shorten{order:3}
     }
-
-    .message.error {
-      display: block;
-      color: #ffaaaa;
-      background: #ff777714;
-      border: 1px solid #ff777733;
-    }
-
-    .message.info {
-      display: block;
-      color: var(--cyan);
-      background: #50e1d010;
-      border: 1px solid #50e1d033;
-    }
-
-    .result {
-      display: none;
-      margin-top: 24px;
-      padding: 22px;
-      border-radius: 17px;
-      border: 1px solid #62e6ad44;
-      background: #62e6ad09;
-      animation: appear .35s ease;
-    }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .result h3 {
-      margin: 0 0 20px;
-      color: var(--success);
-      font-size: 19px;
-    }
-
-    .result-item { margin-top: 17px; }
-
-    .result-label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .copy-row {
-      display: flex;
-      gap: 8px;
-      align-items: stretch;
-    }
-
-    .copy-value {
-      min-width: 0;
-      flex: 1;
-      padding: 14px 12px;
-      border-radius: 11px;
-      background: #071426;
-      border: 1px solid var(--border);
-      color: var(--cyan);
-      direction: ltr;
-      text-align: left;
-      overflow-wrap: anywhere;
-      font-size: 13px;
-      line-height: 1.7;
-      user-select: text;
-    }
-
-    .copy-btn {
-      flex-shrink: 0;
-      border: 1px solid #50e1d044;
-      border-radius: 11px;
-      padding: 0 15px;
-      background: #50e1d012;
-      color: var(--cyan);
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .copy-btn:hover { background: #50e1d026; }
-
-    .result-note {
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.8;
-      margin-top: 17px;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 65px 0;
-    }
-
-    .feature {
-      padding: 23px 17px;
-      text-align: center;
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      background: #ffffff06;
-    }
-
-    .feature-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    .feature h3 { font-size: 15px; margin: 0 0 9px; }
-    .feature p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.9;
-      margin: 0;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 25px 0;
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-      line-height: 2;
-    }
-
-    @media(max-width:650px) {
-      .hero { padding-top: 43px; }
-      .workspace { padding: 20px 15px; }
-      .features { grid-template-columns: 1fr; margin: 42px 0; }
-      .header-tag { font-size: 10px; padding: 8px 10px; }
-      .brand { font-size: 24px; }
-      .copy-row { flex-direction: column; }
-      .copy-btn { min-height: 43px; }
+    @media(max-width:620px){
+      .bar{height:78px;padding:0 14px}
+      .logo b{font-size:44px}.logo b svg{width:44px;height:44px}.logo small{margin-left:72px;font-size:12px}
+      nav{top:70px}
+      .barform{flex-wrap:wrap;border-radius:30px;padding:8px}
+      #originalUrl{flex:1 1 60%;font-size:16px;height:52px}
+      .lnk{width:40px;height:40px;font-size:24px}
+      .go{width:100%;justify-content:center;height:56px;font-size:19px;order:5}
+      .perks{grid-template-columns:1fr}.perk::before{display:none!important}.perk{padding:4px 6px}
+      .cards{grid-template-columns:1fr}
+      .banner{flex-direction:column;height:auto;padding:24px 20px;gap:14px;border-radius:34px}
+      .banner h2{white-space:normal;text-align:center}
+      .modal{padding:34px 18px 22px;border-radius:30px}
+      .modal h2{font-size:25px}
+      .copyrow{flex-direction:column}.cp{height:46px;justify-content:center}
     }
   </style>
 </head>
 
 <body>
-  <header class="container">
-    <div class="brand">
-      <div class="brand-icon">↗</div>
-      <div>
-        AQX
-        <small>SMART LINK ENGINE</small>
-      </div>
+  <!-- ===== مكتبة الأيقونات والتدرجات (مدمجة) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="gRocket" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d4c9ff"/></linearGradient>
+      <linearGradient id="gPurple" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b6cf0"/><stop offset="1" stop-color="#3a1c9f"/></linearGradient>
+      <linearGradient id="gFin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a6cf5"/><stop offset="1" stop-color="#2f2395"/></linearGradient>
+      <linearGradient id="gFlame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset=".45" stop-color="#ffb02e"/><stop offset="1" stop-color="#ff5a1f"/></linearGradient>
+      <linearGradient id="gWin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a82f5"/><stop offset="1" stop-color="#4a2fb8"/></linearGradient>
+      <linearGradient id="gScreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0ebff"/><stop offset="1" stop-color="#c9bdfc"/></linearGradient>
+      <linearGradient id="gChain" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#bfb1fb"/></linearGradient>
+      <linearGradient id="gRing" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity=".1"/><stop offset=".5" stop-color="#ffffff"/><stop offset="1" stop-color="#c7b8ff" stop-opacity=".6"/></linearGradient>
+      <linearGradient id="gBar" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#5b3fe0"/><stop offset="1" stop-color="#9d8bff"/></linearGradient>
+      <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe98a"/><stop offset=".5" stop-color="#ffc13a"/><stop offset="1" stop-color="#e48a10"/></linearGradient>
+      <linearGradient id="gGlassBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe3ff"/><stop offset="1" stop-color="#4f8ff2"/></linearGradient>
+      <linearGradient id="gCard" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9a6ff" stop-opacity=".85"/><stop offset="1" stop-color="#6a45e0" stop-opacity=".75"/></linearGradient>
+      <linearGradient id="gCloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d8cfff"/></linearGradient>
+      <linearGradient id="gFrame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a84f2"/><stop offset="1" stop-color="#4527b0"/></linearGradient>
+      <linearGradient id="gSwoosh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8b3df0"/><stop offset="1" stop-color="#5a2fd0" stop-opacity=".35"/></linearGradient>
+      <filter id="fGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="fShadow" x="-20%" y="-20%" width="150%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#2a1070" flood-opacity=".35"/></filter>
+
+      <symbol id="rocket" viewBox="0 0 200 250">
+        <path d="M82 150 Q100 242 118 150Z" fill="url(#gFlame)"/>
+        <path d="M92 150 Q100 205 108 150Z" fill="#fff6c8"/>
+        <path d="M62 106 Q28 128 24 170 L68 152Z" fill="url(#gFin)"/>
+        <path d="M138 106 Q172 128 176 170 L132 152Z" fill="url(#gFin)"/>
+        <path d="M100 6 C144 40 154 100 141 154 L59 154 C46 100 56 40 100 6Z" fill="url(#gRocket)" stroke="#c9bdfc" stroke-width="2"/>
+        <path d="M100 6 C117 20 129 36 135 58 L65 58 C71 36 83 20 100 6Z" fill="url(#gPurple)"/>
+        <circle cx="100" cy="102" r="24" fill="#fff" stroke="#bfb1fb" stroke-width="4"/>
+        <circle cx="100" cy="102" r="15" fill="url(#gWin)"/>
+        <circle cx="94" cy="96" r="4" fill="#fff" opacity=".85"/>
+        <path d="M61 140 L139 140 L141 154 L59 154Z" fill="#8f7cff"/>
+        <rect x="78" y="152" width="44" height="11" rx="5" fill="#3a1c9f"/>
+      </symbol>
+
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 1.5 4 14h6.2l-1.4 8.5L20 9.5h-6.5z" fill="currentColor"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M12 2.5 1.8 11.6h2.9V21h5.6v-6h3.4v6h5.6v-9.4h2.9z" fill="currentColor"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 1.8 3.1 6.6 7.2.9-5.3 5 1.4 7.2L12 17.9 5.6 21.5 7 14.3 1.7 9.3l7.2-.9z" fill="currentColor"/></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="currentColor"/><path d="M9.2 9.4a2.9 2.9 0 1 1 4.2 2.6c-.9.5-1.4 1.1-1.4 2M12 17.2h.01" stroke="#2a1070" stroke-width="2.4" stroke-linecap="round" fill="none"/></symbol>
+      <symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="2.8" y="13" width="4.4" height="7" rx="2" fill="currentColor"/><rect x="16.8" y="13" width="4.4" height="7" rx="2" fill="currentColor"/><path d="M19 20.2c0 1.4-1.6 2-4 2h-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.2 13.8a4.6 4.6 0 0 0 6.5 0l3.2-3.2a4.6 4.6 0 0 0-6.5-6.5l-1.1 1.1"/><path d="M13.8 10.2a4.6 4.6 0 0 0-6.5 0l-3.2 3.2a4.6 4.6 0 0 0 6.5 6.5l1.1-1.1"/></g></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10.5" width="16" height="11.5" rx="3" fill="currentColor"/><path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="15.6" r="1.7" fill="#fff"/><rect x="11.2" y="16" width="1.6" height="3" rx=".8" fill="#fff"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><rect x="3" y="12" width="4.4" height="9" rx="1.4" fill="currentColor"/><rect x="9.8" y="6" width="4.4" height="15" rx="1.4" fill="currentColor"/><rect x="16.6" y="2" width="4.4" height="19" rx="1.4" fill="currentColor"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 1.8 3.5 5v6.2c0 5.3 3.6 9.5 8.5 11 4.9-1.5 8.5-5.7 8.5-11V5z" fill="currentColor"/><path d="m8 12 3 3 5-6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M20 12H4.5M10.5 5.5 4 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="3"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></g></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-img" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 16v2.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V16"/></g></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></g></symbol>
+      <symbol id="i-spk" viewBox="0 0 24 24"><path d="M3 9.5v5h4l5.5 4.5v-14L7 9.5z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.6 5.8a9 9 0 0 1 0 12.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+      <symbol id="i-spk-off" viewBox="0 0 24 24"><path d="M3 9.5v5h4l5.5 4.5v-14L7 9.5z" fill="currentColor"/><path d="m16 9.5 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="bg-blob a"></div><div class="bg-blob b"></div>
+
+  <!-- ===== الهيدر ===== -->
+  <header>
+    <div class="bar rise">
+      <a class="cta-top" href="#shorten" id="topCta"><svg class="ico"><use href="#i-bolt"/></svg>روابطك باختصار</a>
+
+      <nav id="nav" aria-label="القائمة الرئيسية">
+        <!-- ملفات الصفحات: features.html | stats.html | faq.html | contact.html -->
+        <a class="active" href="features.html"><svg class="ico"><use href="#i-home"/></svg>ميزاتنا</a>
+        <a href="stats.html"><svg class="ico"><use href="#i-star"/></svg>إحصائيات</a>
+        <a href="faq.html"><svg class="ico"><use href="#i-help"/></svg>الأسئلة الشائعة</a>
+        <a href="contact.html"><svg class="ico"><use href="#i-headset"/></svg>تواصل معنا</a>
+      </nav>
+
+      <a class="logo" href="index.html" aria-label="AQX Link Shortener">
+        <b>AQX<svg viewBox="0 0 64 64" aria-hidden="true"><use href="#rocket" width="64" height="64"/></svg></b>
+        <small>Link Shortener</small>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="القائمة" aria-expanded="false">☰</button>
     </div>
-    <div class="header-tag">⚡ اختصار سريع ومجاني</div>
   </header>
 
-  <main class="container">
+  <main class="wrap">
+    <!-- ===== الهيرو ===== -->
     <section class="hero">
-      <span class="eyebrow">مرحبًا بك في الجيل الجديد من اختصار الروابط</span>
-      <h1>رابطك الطويل؟<br><span>خلّيه قصير وذكي.</span></h1>
-      <p>
-        اختصر روابطك بسهولة، وشاركها في أي مكان.
-        احصل على رابط مختصر ورمز خاص للاستعلام عن إحصائيات الرابط.
-      </p>
+      <div class="hero-text">
+        <h1 class="rise" style="animation-delay:.1s">اختصر روابطك<br>بسهولة وأمان</h1>
+        <svg class="swoosh rise" style="animation-delay:.2s" viewBox="0 0 340 22" preserveAspectRatio="none" aria-hidden="true"><path d="M2 16C70 4 180 2 338 8C200 8 90 14 2 16Z" fill="url(#gSwoosh)"/></svg>
+        <p class="sub rise" style="animation-delay:.3s">حوّل الروابط الطويلة إلى روابط قصيرة احترافية<br>مع إحصائيات دقيقة وأداء فائق السرعة</p>
 
-      <div class="workspace">
-        <form id="shortenForm">
-          <div class="field">
-            <label for="originalUrl">الرابط الأصلي</label>
-            <input
-              id="originalUrl"
-              type="url"
-              placeholder="https://example.com/your-long-link"
-              autocomplete="url"
-              required
-              maxlength="4096"
-            >
-            <div class="hint">أدخل الرابط الكامل الذي تريد اختصاره، ويجب أن يبدأ بـ https:// أو http://</div>
-          </div>
-
-          <div class="field">
-            <label for="customAlias">
-              رمز مخصص للرابط
-              <span class="optional">(اختياري)</span>
-            </label>
-            <input
-              id="customAlias"
-              type="text"
-              placeholder="my-link"
-              maxlength="32"
-              pattern="[A-Za-z0-9_-]{3,32}"
-              autocomplete="off"
-            >
-            <div class="hint">من 3 إلى 32 حرفًا أو رقمًا، ويسمح بالشرطة والشرطة السفلية. يجب أن يكون الرمز متاحًا.</div>
-          </div>
-
-          <div class="field">
-            <label for="linkTitle">
-              اسم الرابط
-              <span class="optional">(اختياري)</span>
-            </label>
-            <input
-              id="linkTitle"
-              type="text"
-              placeholder="مثال: رابط المتجر"
-              maxlength="200"
-            >
-          </div>
-
-          <button class="primary" id="submitBtn" type="submit">
-            اختصر الرابط الآن ←
-          </button>
-        </form>
-
-        <div id="message" class="message" role="status" aria-live="polite"></div>
-
-        <section id="result" class="result" aria-live="polite">
-          <h3>✓ تم إنشاء رابطك بنجاح</h3>
-
-          <div class="result-item">
-            <span class="result-label">الرابط المختصر</span>
-            <div class="copy-row">
-              <div class="copy-value" id="shortUrl"></div>
-              <button class="copy-btn" type="button" data-copy="shortUrl">نسخ الرابط</button>
+        <div class="shorten rise" id="shorten" style="animation-delay:.4s">
+          <form id="shortenForm" novalidate autocomplete="off">
+            <div class="barform">
+              <button class="go" id="submitBtn" type="submit">
+                <svg class="ico"><use href="#i-bolt"/></svg><span class="spin" aria-hidden="true"></span><span id="goText">اختصر الآن</span>
+              </button>
+              <label for="originalUrl" class="sr">الرابط الأصلي</label>
+              <input id="originalUrl" type="url" inputmode="url" placeholder="الصق رابطك هنا ليتحوّل إلى رابط أنيق وآمن…" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="4096" required>
+              <span class="lnk" aria-hidden="true"><svg class="ico"><use href="#i-link"/></svg></span>
+              <!-- فخ للروبوتات -->
+              <input class="hp" type="text" name="website" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             </div>
-          </div>
+          </form>
+          <div id="message" class="msg" role="status" aria-live="polite"></div>
+        </div>
+      </div>
 
-          <div class="result-item">
-            <span class="result-label">رمز الاستعلام عن الإحصائيات</span>
-            <div class="copy-row">
-              <div class="copy-value" id="analyticsCode"></div>
-              <button class="copy-btn" type="button" data-copy="analyticsCode">نسخ الرمز</button>
-            </div>
-          </div>
+      <!-- رسم الهيرو -->
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 700 560">
+          <!-- شبكة نقاط -->
+          <g fill="#fff" opacity=".7">
+            <circle cx="22" cy="70" r="2.4"/><circle cx="42" cy="70" r="2.4"/><circle cx="62" cy="70" r="2.4"/><circle cx="82" cy="70" r="2.4"/>
+            <circle cx="22" cy="90" r="2.4"/><circle cx="42" cy="90" r="2.4"/><circle cx="62" cy="90" r="2.4"/><circle cx="82" cy="90" r="2.4"/>
+            <circle cx="22" cy="110" r="2.4"/><circle cx="42" cy="110" r="2.4"/><circle cx="62" cy="110" r="2.4"/>
+            <circle cx="22" cy="130" r="2.4"/><circle cx="42" cy="130" r="2.4"/>
+          </g>
+          <!-- هالة خلفية -->
+          <ellipse cx="300" cy="290" rx="300" ry="230" fill="#8b6cf0" opacity=".16" filter="url(#fGlow)"/>
 
-          <p class="result-note">
-            احتفظ برمز الاستعلام. يمكنك استخدامه للاستعلام عن إحصائيات الرابط.
-            ويمكنك أيضًا الاستعلام باستخدام الرابط الأصلي أو المختصر وفق آلية المحرك.
-          </p>
-        </section>
+          <!-- السحب -->
+          <g>
+            <g fill="url(#gCloud)" opacity=".95">
+              <circle cx="130" cy="470" r="46"/><circle cx="190" cy="440" r="58"/><circle cx="262" cy="466" r="48"/>
+              <rect x="70" y="466" width="250" height="52" rx="26"/>
+            </g>
+            <g fill="#fff" opacity=".9"><circle cx="30" cy="505" r="30"/><circle cx="78" cy="494" r="34"/><rect x="0" y="500" width="130" height="34" rx="17"/></g>
+            <g fill="url(#gCloud)" opacity=".85"><circle cx="560" cy="430" r="28"/><circle cx="606" cy="420" r="36"/><circle cx="650" cy="438" r="26"/><rect x="540" y="432" width="130" height="28" rx="14"/></g>
+          </g>
+
+          <!-- الحلقة (النصف الخلفي) -->
+          <g transform="rotate(-12 300 300)">
+            <path d="M12 300 A290 72 0 0 1 592 300" fill="none" stroke="#fff" stroke-width="16" opacity=".35" filter="url(#fGlow)"/>
+            <path d="M12 300 A290 72 0 0 1 592 300" fill="none" stroke="url(#gRing)" stroke-width="7" stroke-linecap="round"/>
+          </g>
+
+          <!-- نافذة المتصفح -->
+          <g class="float" filter="url(#fShadow)">
+            <g transform="rotate(-9 280 250)">
+              <rect x="112" y="92" width="336" height="276" rx="30" fill="url(#gFrame)"/>
+              <rect x="112" y="92" width="336" height="276" rx="30" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+              <circle cx="146" cy="118" r="8" fill="#ff9a3c"/><circle cx="172" cy="118" r="8" fill="#2fd0c0"/><circle cx="198" cy="118" r="8" fill="#fff"/>
+              <rect x="130" y="140" width="300" height="212" rx="18" fill="url(#gScreen)"/>
+              <path d="M130 160 Q280 130 430 170 L430 140 Q280 120 130 140Z" fill="#fff" opacity=".4"/>
+              <!-- السلسلة -->
+              <g transform="rotate(-42 280 250)" fill="none" stroke-linecap="round">
+                <rect x="196" y="222" width="108" height="58" rx="29" stroke="#8c7bd6" stroke-width="22" opacity=".35" transform="translate(4 8)"/>
+                <rect x="256" y="222" width="108" height="58" rx="29" stroke="#8c7bd6" stroke-width="22" opacity=".35" transform="translate(4 8)"/>
+                <rect x="196" y="222" width="108" height="58" rx="29" stroke="url(#gChain)" stroke-width="18"/>
+                <rect x="256" y="222" width="108" height="58" rx="29" stroke="url(#gChain)" stroke-width="18"/>
+                <path d="M262 232 a24 24 0 0 1 24 -6" stroke="#fff" stroke-width="5" opacity=".9"/>
+              </g>
+            </g>
+          </g>
+
+          <!-- الحلقة (النصف الأمامي) -->
+          <g transform="rotate(-12 300 300)">
+            <path d="M12 300 A290 72 0 0 0 592 300" fill="none" stroke="#fff" stroke-width="18" opacity=".45" filter="url(#fGlow)"/>
+            <path d="M12 300 A290 72 0 0 0 592 300" fill="none" stroke="url(#gRing)" stroke-width="8" stroke-linecap="round"/>
+          </g>
+
+          <!-- الصاروخ -->
+          <g class="float2">
+            <path d="M470 150 Q420 190 400 250" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+            <use href="#rocket" x="448" y="40" width="150" height="188" transform="rotate(38 523 134)"/>
+            <g fill="#fff"><circle cx="420" cy="214" r="3"/><circle cx="640" cy="120" r="3"/><circle cx="440" cy="110" r="2.5"/></g>
+            <path d="M650 190 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z" fill="#fff" opacity=".9"/>
+          </g>
+
+          <!-- بطاقة +100K -->
+          <g class="float" filter="url(#fShadow)">
+            <g transform="rotate(-12 500 390)">
+              <rect x="390" y="330" width="230" height="124" rx="22" fill="url(#gCard)" stroke="#fff" stroke-opacity=".7" stroke-width="1.5"/>
+              <rect x="390" y="330" width="230" height="52" rx="22" fill="#fff" opacity=".12"/>
+              <rect x="410" y="396" width="16" height="34" rx="4" fill="url(#gBar)"/>
+              <rect x="436" y="382" width="16" height="48" rx="4" fill="url(#gBar)"/>
+              <rect x="462" y="366" width="16" height="64" rx="4" fill="url(#gBar)"/>
+              <rect x="488" y="350" width="16" height="80" rx="4" fill="url(#gBar)"/>
+              <text x="590" y="372" text-anchor="end" font-family="Cairo,Arial,sans-serif" font-weight="900" font-size="34" fill="#fff">+100K</text>
+              <text x="560" y="408" text-anchor="end" font-family="Cairo,Arial,sans-serif" font-weight="700" font-size="22" fill="#fff" opacity=".95">نقرة</text>
+            </g>
+          </g>
+        </svg>
       </div>
     </section>
 
-    <section class="features">
-      <article class="feature">
-        <div class="feature-icon">⚡</div>
-        <h3>اختصار سريع</h3>
-        <p>حوّل الروابط الطويلة إلى روابط مختصرة سهلة المشاركة.</p>
+    <!-- ===== شريط المزايا ===== -->
+    <section class="perks" aria-label="المزايا">
+      <div class="perk rise" style="animation-delay:.5s"><div class="perk-ico"><svg class="ico"><use href="#i-shield"/></svg></div><h3>أمان عالي<span>وحماية متقدمة</span></h3></div>
+      <div class="perk rise" style="animation-delay:.58s"><div class="perk-ico"><svg class="ico"><use href="#i-bolt"/></svg></div><h3>سرعة فائقة<span>في التحويل</span></h3></div>
+      <div class="perk rise" style="animation-delay:.66s"><div class="perk-ico"><svg class="ico"><use href="#i-chart"/></svg></div><h3>إحصائيات مفصلة<span>ومحدثة</span></h3></div>
+      <div class="perk rise" style="animation-delay:.74s"><div class="perk-ico"><svg class="ico"><use href="#i-lock"/></svg></div><h3>روابط قصيرة<span>وسهولة المشاركة</span></h3></div>
+    </section>
+
+    <!-- ===== الكروت ===== -->
+    <section class="cards" aria-label="الخدمات">
+      <!-- ملفات الكروت: performance.html | stats.html | query.html | advertise.html -->
+      <article class="card rise" style="animation-delay:.6s">
+        <div class="card-top">
+          <div class="card-text"><h3>أداء فائق</h3><p>تحويل سريع<br>في أقل وقت ممكن</p></div>
+          <div class="card-art"><svg viewBox="0 0 120 150"><use href="#rocket" width="120" height="150" transform="rotate(30 60 75)"/></svg></div>
+        </div>
+        <a class="more" href="performance.html">اكتشف المزيد<svg class="ico"><use href="#i-arrow"/></svg></a>
       </article>
 
-      <article class="feature">
-        <div class="feature-icon">🔐</div>
-        <h3>رمز استعلام خاص</h3>
-        <p>احصل على رمز مخصص للاستعلام عن إحصائيات رابطك.</p>
+      <article class="card rise" style="animation-delay:.68s">
+        <div class="card-top">
+          <div class="card-text"><h3>إحصائيات دقيقة</h3><p>تابع أداء روابطك<br>بكل وضوح وشفافية</p></div>
+          <div class="card-art"><svg viewBox="0 0 140 120">
+            <rect x="4" y="12" width="104" height="88" rx="10" fill="#fff" stroke="#cfc4ff" stroke-width="2"/>
+            <rect x="4" y="12" width="104" height="16" rx="10" fill="#8b6cf0"/><circle cx="16" cy="20" r="3" fill="#fff"/><circle cx="26" cy="20" r="3" fill="#fff" opacity=".7"/>
+            <rect x="16" y="36" width="34" height="5" rx="2.5" fill="#d9d0ff"/><rect x="16" y="46" width="24" height="5" rx="2.5" fill="#e6e0ff"/>
+            <rect x="16" y="62" width="10" height="30" rx="2" fill="url(#gBar)"/><rect x="30" y="52" width="10" height="40" rx="2" fill="url(#gBar)"/><rect x="44" y="68" width="10" height="24" rx="2" fill="url(#gBar)"/><rect x="58" y="44" width="10" height="48" rx="2" fill="url(#gBar)"/>
+            <circle cx="104" cy="76" r="26" fill="#fff" stroke="#e1daff" stroke-width="2"/>
+            <circle cx="104" cy="76" r="16" fill="none" stroke="#4f8ff2" stroke-width="16" stroke-dasharray="62 40" transform="rotate(-90 104 76)"/>
+            <circle cx="104" cy="76" r="16" fill="none" stroke="#ff9a3c" stroke-width="16" stroke-dasharray="26 76" stroke-dashoffset="-62" transform="rotate(-90 104 76)"/>
+            <circle cx="104" cy="76" r="16" fill="none" stroke="#6a3de0" stroke-width="16" stroke-dasharray="14 88" stroke-dashoffset="-88" transform="rotate(-90 104 76)"/>
+          </svg></div>
+        </div>
+        <a class="more" href="stats.html">عرض الإحصائيات<svg class="ico"><use href="#i-arrow"/></svg></a>
       </article>
 
-      <article class="feature">
-        <div class="feature-icon">📊</div>
-        <h3>إحصائيات الروابط</h3>
-        <p>استخدم رمزك أو رابطك للاستعلام عن بيانات التحويل المتاحة.</p>
+      <article class="card rise" style="animation-delay:.76s">
+        <div class="card-top">
+          <div class="card-text"><h3>استعلام</h3><p>تحقق من رابطك<br>واستعرض تفاصيله</p></div>
+          <div class="card-art"><svg viewBox="0 0 130 130">
+            <path d="M86 84 L116 116" stroke="#2a1a5e" stroke-width="13" stroke-linecap="round"/>
+            <circle cx="56" cy="54" r="40" fill="url(#gGlassBlue)" stroke="#2a1a5e" stroke-width="9"/>
+            <circle cx="56" cy="54" r="40" fill="none" stroke="#6a45e0" stroke-width="3" opacity=".5"/>
+            <path d="M32 44 A28 28 0 0 1 52 26" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity=".9"/>
+          </svg></div>
+        </div>
+        <a class="more" href="query.html"><svg class="ico" style="display:none"></svg>استعلم الآن<svg class="ico"><use href="#i-arrow"/></svg></a>
       </article>
+
+      <article class="card rise" style="animation-delay:.84s">
+        <div class="card-top">
+          <div class="card-text"><h3>أعلن لدينا</h3><p>نوفر لك منصة مثالية<br>لإعلانك والوصول لجمهور أوسع</p></div>
+          <div class="card-art"><svg viewBox="0 0 130 120">
+            <g stroke="#ffb02e" stroke-width="5" stroke-linecap="round"><path d="M86 18 L96 6"/><path d="M98 34 L114 28"/><path d="M100 52 L116 52"/></g>
+            <path d="M34 48 L96 20 L96 88 L34 68Z" fill="#fff" stroke="#bfb1fb" stroke-width="3" stroke-linejoin="round"/>
+            <ellipse cx="96" cy="54" rx="13" ry="34" fill="url(#gWin)" stroke="#3a1c9f" stroke-width="3"/>
+            <ellipse cx="96" cy="54" rx="6" ry="26" fill="#cfc4ff" opacity=".7"/>
+            <rect x="12" y="46" width="26" height="24" rx="8" fill="url(#gPurple)"/>
+            <path d="M40 68 L50 100 Q52 106 60 104 L66 102 L56 70Z" fill="url(#gPurple)"/>
+          </svg></div>
+        </div>
+        <a class="more" href="advertise.html">اعرف المزيد<svg class="ico"><use href="#i-arrow"/></svg></a>
+      </article>
+    </section>
+
+    <!-- ===== البانر ===== -->
+    <section class="banner rise" style="animation-delay:.9s">
+      <a class="start" href="#shorten" id="startBtn">ابدأ الآن<svg class="ico"><use href="#i-bolt"/></svg></a>
+      <h2><em>AQX</em> .. اختصارٌ أذكى .. وصولٌ أسرع<u></u></h2>
+      <svg class="trophy" viewBox="0 0 90 100" aria-hidden="true">
+        <path d="M22 14H8c0 20 6 30 20 32M68 14h14c0 20-6 30-20 32" fill="none" stroke="url(#gGold)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M20 8h50v26c0 18-11 30-25 30S20 52 20 34z" fill="url(#gGold)"/>
+        <path d="M28 14h8v34c-6-4-8-12-8-20z" fill="#fff" opacity=".35"/>
+        <path d="m45 20 4 9 10 1-7.5 6.5 2.5 10L45 41l-9 5.5 2.5-10L31 30l10-1z" fill="#fff" opacity=".9"/>
+        <rect x="39" y="62" width="12" height="14" fill="url(#gGold)"/>
+        <rect x="26" y="76" width="38" height="10" rx="4" fill="url(#gGold)"/>
+        <rect x="20" y="86" width="50" height="10" rx="4" fill="#e48a10"/>
+      </svg>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <strong>AQX</strong> — اختصر برابطك، واستعلم برابطك أو رمزك فقط.
-      <br>
-      © <span id="year"></span> AQX Engine. جميع الحقوق محفوظة.
+  <button class="mute" id="muteBtn" type="button" aria-label="تشغيل / إيقاف الصوت" title="الصوت">
+    <svg class="ico on"><use href="#i-spk"/></svg><svg class="ico off"><use href="#i-spk-off"/></svg>
+  </button>
+
+  <!-- ===== نافذة النجاح ===== -->
+  <div class="overlay" id="overlay" role="presentation">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <canvas id="confetti"></canvas>
+      <button class="x" id="closeX" type="button" aria-label="إغلاق"><svg class="ico"><use href="#i-close"/></svg></button>
+
+      <div class="tick">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <defs><linearGradient id="gOk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3ed89c"/><stop offset="1" stop-color="#14a06b"/></linearGradient></defs>
+          <circle cx="60" cy="60" r="52" fill="#fff" stroke="#d6f6e8" stroke-width="2"/>
+          <circle class="ring" cx="60" cy="60" r="50" fill="none" stroke="url(#gOk)" stroke-width="7" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+          <path class="chk" d="M38 62l16 16 30-34" fill="none" stroke="url(#gOk)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 id="mTitle">تم اختصار رابطك بنجاح</h2>
+      <p class="lead">رابطك جاهز للمشاركة في أي مكان</p>
+
+      <div class="field-box">
+        <div class="lbl"><svg class="ico"><use href="#i-link"/></svg>الرابط المختصر</div>
+        <div class="copyrow">
+          <div class="val" id="shortUrl"></div>
+          <button class="cp" type="button" data-copy="shortUrl"><svg class="ico"><use href="#i-copy"/></svg><span>نسخ الرابط</span></button>
+        </div>
+      </div>
+
+      <div class="field-box">
+        <div class="lbl"><svg class="ico"><use href="#i-lock"/></svg>رمز الاستعلام عن الإحصائيات</div>
+        <div class="copyrow">
+          <div class="val code" id="analyticsCode"></div>
+          <button class="cp" type="button" data-copy="analyticsCode"><svg class="ico"><use href="#i-copy"/></svg><span>نسخ الرمز</span></button>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h4><svg class="ico"><use href="#i-chart"/></svg>كيف تعرف إحصائيات رابطك؟</h4>
+        <p>احتفظ بالرمز والرابط، ثم ادخل على صفحة «الاستعلام» وأدخل أيًّا مما يلي:</p>
+        <ol>
+          <li>رمز الاستعلام</li>
+          <li>الرابط الأصلي</li>
+          <li>الرابط المختصر</li>
+        </ol>
+      </div>
+
+      <div class="actions">
+        <a class="btn-q" href="query.html"><svg class="ico"><use href="#i-search"/></svg>الاستعلام الآن</a>
+        <button class="btn-s" id="saveImg" type="button"><svg class="ico"><use href="#i-img"/></svg>حفظ كصورة</button>
+        <button class="btn-c" id="closeBtn" type="button"><svg class="ico"><use href="#i-close"/></svg>إغلاق</button>
+      </div>
     </div>
-  </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
     "use strict";
+    (function () {
 
-    // إعدادات الاتصال بمحرك AQX
-    const API_BASE =
-      "https://vuszqzgldbsscuxdfhdz.supabase.co/functions/v1/aqx-engine";
+      // إعدادات الاتصال بمحرك AQX
+      const API_BASE =
+        "https://vuszqzgldbsscuxdfhdz.supabase.co/functions/v1/aqx-engine";
 
-    // مفتاح النشر العام فقط، وليس مفتاحًا سريًا.
-    const PUBLIC_KEY =
-      "sb_publishable_cI7C0sL9M4OLvsa-JGAAFQ_KfqlkI7X";
+      // مفتاح النشر العام فقط، وليس مفتاحًا سريًا.
+      const PUBLIC_KEY =
+        "sb_publishable_cI7C0sL9M4OLvsa-JGAAFQ_KfqlkI7X";
 
-    const form = document.getElementById("shortenForm");
-    const urlInput = document.getElementById("originalUrl");
-    const aliasInput = document.getElementById("customAlias");
-    const titleInput = document.getElementById("linkTitle");
-    const submitBtn = document.getElementById("submitBtn");
-    const message = document.getElementById("message");
-    const result = document.getElementById("result");
+      const $ = (id) => document.getElementById(id);
+      const form = $("shortenForm");
+      const urlInput = $("originalUrl");
+      const submitBtn = $("submitBtn");
+      const goText = $("goText");
+      const message = $("message");
+      const overlay = $("overlay");
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+      let lastResult = null;
+      let lastFocus = null;
 
-    function showMessage(text, type) {
-      message.textContent = text;
-      message.className = "message " + type;
-    }
+      /* ================= التخزين الآمن ================= */
+      function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+      function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
 
-    function hideMessage() {
-      message.textContent = "";
-      message.className = "message";
-    }
+      /* ================= الصوت ================= */
+      let muted = load("aqx_muted") === "1";
+      const muteBtn = $("muteBtn");
+      muteBtn.classList.toggle("is-off", muted);
 
-    function validHttpUrl(value) {
-      try {
-        const u = new URL(value);
-        return (
-          ["http:", "https:"].includes(u.protocol) &&
-          !u.username &&
-          !u.password
-        );
-      } catch {
+      let ac = null;
+      function audioCtx() {
+        try {
+          if (!ac) { const A = window.AudioContext || window.webkitAudioContext; if (A) ac = new A(); }
+          if (ac && ac.state === "suspended") ac.resume();
+        } catch (e) {}
+        return ac;
+      }
+      function tone(freq, start, dur, type, vol) {
+        const c = audioCtx(); if (!c || muted) return;
+        const o = c.createOscillator(), g = c.createGain(), t = c.currentTime + start;
+        o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(vol || 0.1, t + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.connect(g); g.connect(c.destination);
+        o.start(t); o.stop(t + dur + 0.05);
+      }
+      const clickSound = () => { tone(880, 0, .09, "triangle", .1); tone(1318, .05, .14, "sine", .08); };
+      const successSound = () => { [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach((f, i) => tone(f, i * .11, .5, "sine", .11)); };
+
+      let voice = null;
+      function pickVoice() {
+        if (!("speechSynthesis" in window)) return;
+        const list = speechSynthesis.getVoices() || [];
+        const ar = list.filter(v => /^ar/i.test(v.lang));
+        const bad = /(male(?!.*female)|naayf|majed|maged|hamed|shakir|tarik|hamza)/i;
+        const good = /(salma|hoda|laila|leila|zira|female|amira|nour|noor|hala|fatima|sara|mariam)/i;
+        voice =
+          ar.find(v => /ar[-_]EG/i.test(v.lang) && good.test(v.name)) ||
+          ar.find(v => /ar[-_]EG/i.test(v.lang) && !bad.test(v.name)) ||
+          ar.find(v => good.test(v.name)) ||
+          ar.find(v => !bad.test(v.name)) || ar[0] || null;
+      }
+      if ("speechSynthesis" in window) {
+        pickVoice();
+        speechSynthesis.onvoiceschanged = pickVoice;
+      }
+
+      const SUCCESS_TEXT =
+        "مبروك! رابطك اتختصر بنجاح. انسخ الرابط المختصر والرمز واحتفظ بيهم. " +
+        "وتقدر تستعلم عن الإحصائيات بالرمز، أو بالرابط الأصلي، أو بالرابط المختصر، من صفحة الاستعلام.";
+
+      let voiceAudio = null;
+      function tryVoiceFile() {
+        // لو رفعت ملف صوت بصوت بنت مصرية: assets/voice-success.mp3 سيُشغَّل بدل صوت الجهاز
+        return new Promise((resolve) => {
+          let done = false;
+          const a = new Audio("assets/voice-success.mp3");
+          voiceAudio = a;
+          const fin = (ok) => { if (!done) { done = true; if (!ok) { try { a.pause(); a.removeAttribute("src"); } catch (e) {} } resolve(ok); } };
+          a.addEventListener("error", () => fin(false), { once: true });
+          a.addEventListener("canplay", () => { a.play().then(() => fin(true)).catch(() => fin(false)); }, { once: true });
+          setTimeout(() => fin(false), 1200);
+          try { a.load(); } catch (e) { fin(false); }
+        });
+      }
+      function speakText(text) {
+        if (muted || !("speechSynthesis" in window)) return;
+        try {
+          speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = "ar-EG";
+          if (voice) { u.voice = voice; u.lang = voice.lang; }
+          u.pitch = 1.22; u.rate = 0.93; u.volume = 1;
+          speechSynthesis.speak(u);
+        } catch (e) {}
+      }
+      async function playSuccessVoice() {
+        if (muted) return;
+        const ok = await tryVoiceFile();
+        if (!ok) speakText(SUCCESS_TEXT);
+      }
+      function stopVoice() {
+        try { if ("speechSynthesis" in window) speechSynthesis.cancel(); } catch (e) {}
+        try { if (voiceAudio) voiceAudio.pause(); } catch (e) {}
+      }
+      // تهيئة الصوت عند أول ضغطة (سياسة المتصفحات)
+      function primeAudio() {
+        audioCtx();
+        try {
+          if ("speechSynthesis" in window) {
+            const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u);
+          }
+        } catch (e) {}
+      }
+
+      muteBtn.addEventListener("click", () => {
+        muted = !muted; store("aqx_muted", muted ? "1" : "0");
+        muteBtn.classList.toggle("is-off", muted);
+        if (muted) stopVoice(); else clickSound();
+      });
+
+      /* ================= رسائل ================= */
+      function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "msg " + type;
+      }
+      function hideMessage() { message.textContent = ""; message.className = "msg"; }
+
+      let toastT;
+      function toast(t) {
+        const el = $("toast"); el.textContent = t; el.classList.add("show");
+        clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove("show"), 2000);
+      }
+
+      /* ================= التحقق من الرابط ================= */
+      function isPrivateHost(h) {
+        h = h.toLowerCase();
+        if (h === "localhost" || h.endsWith(".localhost") || h.endsWith(".local") || h.endsWith(".internal")) return true;
+        if (h === "[::1]" || h.startsWith("[fe80") || h.startsWith("[fc") || h.startsWith("[fd")) return true;
+        const m = h.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+        if (m) {
+          const a = +m[1], b = +m[2];
+          if (a === 10 || a === 127 || a === 0) return true;
+          if (a === 169 && b === 254) return true;
+          if (a === 172 && b >= 16 && b <= 31) return true;
+          if (a === 192 && b === 168) return true;
+        }
         return false;
       }
-    }
 
-    function showResult(data) {
-      document.getElementById("shortUrl").textContent = data.short_url;
-      document.getElementById("analyticsCode").textContent =
-        data.analytics_code;
-
-      result.style.display = "block";
-      result.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      hideMessage();
-      result.style.display = "none";
-
-      const originalUrl = urlInput.value.trim();
-      const alias = aliasInput.value.trim();
-      const title = titleInput.value.trim();
-
-      if (!validHttpUrl(originalUrl)) {
-        showMessage("يرجى إدخال رابط صحيح يبدأ بـ http:// أو https://", "error");
-        return;
-      }
-
-      if (alias && !/^[A-Za-z0-9_-]{3,32}$/.test(alias)) {
-        showMessage("الرمز المخصص يجب أن يكون من 3 إلى 32 حرفًا أو رقمًا.", "error");
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "جارٍ إنشاء الرابط...";
-      showMessage("يتم الاتصال بمحرك AQX وإنشاء الرابط...", "info");
-
-      try {
-        const response = await fetch(API_BASE + "/shorten", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": PUBLIC_KEY
-          },
-          body: JSON.stringify({
-            url: originalUrl,
-            alias: alias,
-            title: title
-          }),
-          cache: "no-store"
-        });
-
-        const data = await response.json().catch(() => ({}));
-
-        if (!response.ok || !data.ok) {
-          if (response.status === 409) {
-            throw new Error("الرمز المخصص مستخدم بالفعل. اختر رمزًا آخر.");
-          }
-
-          if (response.status === 400) {
-            throw new Error(data.message || "البيانات المدخلة غير صحيحة.");
-          }
-
-          throw new Error(
-            data.message || "تعذر إنشاء الرابط. حاول مرة أخرى."
+      function validHttpUrl(value) {
+        try {
+          if (/[\u0000-\u001f\u007f\s<>"'`\\]/.test(value)) return false;
+          const u = new URL(value);
+          return (
+            ["http:", "https:"].includes(u.protocol) &&
+            !u.username &&
+            !u.password &&
+            u.hostname.includes(".") &&
+            !isPrivateHost(u.hostname)
           );
+        } catch {
+          return false;
         }
-
-        if (
-          typeof data.short_url !== "string" ||
-          typeof data.analytics_code !== "string" ||
-          typeof data.short_code !== "string"
-        ) {
-          throw new Error("استجابة المحرك غير مكتملة. يرجى مراجعة إعدادات API.");
-        }
-
-        hideMessage();
-        showResult(data);
-
-        showMessage("تم إنشاء الرابط بنجاح وحفظه في محرك AQX.", "info");
-
-      } catch (error) {
-        showMessage(
-          error.message || "حدث خطأ أثناء الاتصال بمحرك AQX.",
-          "error"
-        );
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "اختصر الرابط الآن ←";
       }
-    });
 
-    // نسخ الرابط أو رمز الاستعلام
-    document.querySelectorAll("[data-copy]").forEach((button) => {
-      button.addEventListener("click", async () => {
-        const target = document.getElementById(button.dataset.copy);
-        const value = target.textContent.trim();
+      function normalizeUrl(v) {
+        v = v.trim();
+        if (v && !/^[a-z][a-z0-9+.-]*:/i.test(v)) v = "https://" + v;
+        return v;
+      }
 
-        if (!value) return;
+      /* ================= حماية من الإفراط في الطلبات ================= */
+      const stamps = [];
+      function rateOk() {
+        const now = Date.now();
+        while (stamps.length && now - stamps[0] > 60000) stamps.shift();
+        if (stamps.length >= 8) return false;
+        stamps.push(now); return true;
+      }
+      let busy = false, lastAt = 0;
+
+      /* ================= الإرسال إلى المحرك ================= */
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (busy) return;
+
+        primeAudio();
+        clickSound();
+        hideMessage();
+
+        if ($("hp").value) return; // روبوت
+
+        const originalUrl = normalizeUrl(urlInput.value);
+        // الحقول الاختيارية أُلغيت من الواجهة، وتُرسَل فارغة للحفاظ على نفس بنية الطلب
+        const alias = "";
+        const title = "";
+
+        if (!validHttpUrl(originalUrl)) {
+          showMessage("يرجى إدخال رابط صحيح يبدأ بـ http:// أو https://", "error");
+          urlInput.focus();
+          return;
+        }
+        if (Date.now() - lastAt < 2500) { showMessage("من فضلك انتظر لحظات قبل المحاولة مرة أخرى.", "info"); return; }
+        if (!rateOk()) { showMessage("عدد المحاولات كبير. حاول مرة أخرى بعد دقيقة.", "error"); return; }
+        lastAt = Date.now();
+
+        busy = true;
+        submitBtn.disabled = true;
+        submitBtn.classList.add("loading");
+        goText.textContent = "جارٍ الاختصار...";
+        showMessage("يتم الاتصال بمحرك AQX وإنشاء الرابط...", "info");
+
+        const ctl = new AbortController();
+        const timer = setTimeout(() => ctl.abort(), 25000);
 
         try {
-          await navigator.clipboard.writeText(value);
-          const oldText = button.textContent;
-          button.textContent = "تم النسخ ✓";
+          const response = await fetch(API_BASE + "/shorten", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": PUBLIC_KEY
+            },
+            body: JSON.stringify({
+              url: originalUrl,
+              alias: alias,
+              title: title
+            }),
+            cache: "no-store",
+            referrerPolicy: "no-referrer",
+            credentials: "omit",
+            signal: ctl.signal
+          });
 
-          setTimeout(() => {
-            button.textContent = oldText;
-          }, 1800);
+          const data = await response.json().catch(() => ({}));
 
-        } catch {
+          if (!response.ok || !data.ok) {
+            if (response.status === 409) {
+              throw new Error("الرمز المخصص مستخدم بالفعل. اختر رمزًا آخر.");
+            }
+
+            if (response.status === 400) {
+              throw new Error(data.message || "البيانات المدخلة غير صحيحة.");
+            }
+
+            throw new Error(
+              data.message || "تعذر إنشاء الرابط. حاول مرة أخرى."
+            );
+          }
+
+          if (
+            typeof data.short_url !== "string" ||
+            typeof data.analytics_code !== "string" ||
+            typeof data.short_code !== "string"
+          ) {
+            throw new Error("استجابة المحرك غير مكتملة. يرجى مراجعة إعدادات API.");
+          }
+
+          // أمان: نقبل الرابط المختصر فقط إن كان http/https
+          if (!/^https?:\/\//i.test(data.short_url)) {
+            throw new Error("استجابة المحرك غير صالحة.");
+          }
+
+          hideMessage();
+          showResult(data);
+          urlInput.value = "";
+
+        } catch (error) {
           showMessage(
-            "تعذر النسخ التلقائي. اضغط مطولًا على النص لنسخه.",
+            error && error.name === "AbortError"
+              ? "انتهت مهلة الاتصال. تحقق من الإنترنت وحاول مجددًا."
+              : (error.message || "حدث خطأ أثناء الاتصال بمحرك AQX."),
             "error"
           );
+        } finally {
+          clearTimeout(timer);
+          busy = false;
+          submitBtn.disabled = false;
+          submitBtn.classList.remove("loading");
+          goText.textContent = "اختصر الآن";
         }
       });
-    });
+
+      /* ================= نافذة النجاح ================= */
+      function showResult(data) {
+        lastResult = { short_url: data.short_url, analytics_code: data.analytics_code };
+        $("shortUrl").textContent = data.short_url;
+        $("analyticsCode").textContent = data.analytics_code;
+        document.querySelectorAll(".cp").forEach(b => { b.classList.remove("done"); b.querySelector("span").textContent = b.dataset.copy === "shortUrl" ? "نسخ الرابط" : "نسخ الرمز"; });
+
+        lastFocus = document.activeElement;
+        overlay.classList.add("show");
+        document.body.style.overflow = "hidden";
+        // إعادة تشغيل أنيميشن علامة الصح
+        const tick = overlay.querySelector(".tick"); const c = tick.cloneNode(true); tick.replaceWith(c);
+        $("closeX").focus();
+
+        successSound();
+        confetti();
+        setTimeout(playSuccessVoice, 650);
+      }
+
+      function closeModal() {
+        overlay.classList.remove("show");
+        document.body.style.overflow = "";
+        stopVoice();
+        stopConfetti();
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+      $("closeX").addEventListener("click", closeModal);
+      $("closeBtn").addEventListener("click", () => { clickSound(); closeModal(); });
+      overlay.addEventListener("mousedown", (e) => { if (e.target === overlay) closeModal(); });
+      document.addEventListener("keydown", (e) => {
+        if (!overlay.classList.contains("show")) return;
+        if (e.key === "Escape") closeModal();
+        if (e.key === "Tab") { // حبس التركيز داخل النافذة
+          const f = overlay.querySelectorAll("button,a[href]");
+          const first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      /* نسخ الرابط أو رمز الاستعلام */
+      function fallbackCopy(text) {
+        const ta = document.createElement("textarea");
+        ta.value = text; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0;top:0";
+        document.body.appendChild(ta); ta.select();
+        let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+        ta.remove(); return ok;
+      }
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          clickSound();
+          const value = $(button.dataset.copy).textContent.trim();
+          if (!value) return;
+          let ok = false;
+          try { await navigator.clipboard.writeText(value); ok = true; } catch (e) { ok = fallbackCopy(value); }
+          if (ok) {
+            const span = button.querySelector("span"), old = span.textContent;
+            span.textContent = "تم النسخ ✓"; button.classList.add("done");
+            setTimeout(() => { span.textContent = old; button.classList.remove("done"); }, 1800);
+          } else {
+            toast("تعذر النسخ التلقائي. اضغط مطولًا على النص لنسخه.");
+          }
+        });
+      });
+
+      /* ================= حفظ النافذة كصورة ================= */
+      function rr(ctx, x, y, w, h, r) {
+        ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+      }
+      function fitText(ctx, text, maxW, size, weight, family) {
+        let s = size;
+        do { ctx.font = weight + " " + s + "px " + family; s -= 2; } while (ctx.measureText(text).width > maxW && s > 16);
+      }
+      async function saveAsImage() {
+        if (!lastResult) return;
+        clickSound();
+        try { if (document.fonts && document.fonts.load) await document.fonts.load("800 40px Cairo"); } catch (e) {}
+        const W = 1080, H = 1500, cv = document.createElement("canvas");
+        cv.width = W; cv.height = H; const x = cv.getContext("2d");
+        const F = "Cairo, Tahoma, Arial, sans-serif";
+
+        let g = x.createLinearGradient(0, 0, W, H);
+        g.addColorStop(0, "#2a1070"); g.addColorStop(.55, "#4a24b5"); g.addColorStop(1, "#7a4af0");
+        x.fillStyle = g; x.fillRect(0, 0, W, H);
+        const rg = x.createRadialGradient(W * .8, 160, 10, W * .8, 160, 520);
+        rg.addColorStop(0, "rgba(255,255,255,.28)"); rg.addColorStop(1, "rgba(255,255,255,0)");
+        x.fillStyle = rg; x.fillRect(0, 0, W, H);
+
+        // الشعار
+        x.direction = "ltr"; x.textAlign = "center"; x.fillStyle = "#fff";
+        x.font = "italic 900 110px " + F; x.fillText("AQX", W / 2, 190);
+        x.font = "600 30px " + F; x.globalAlpha = .9; x.fillText("Link Shortener", W / 2, 240); x.globalAlpha = 1;
+
+        // البطاقة
+        x.save(); x.shadowColor = "rgba(10,0,50,.5)"; x.shadowBlur = 60; x.shadowOffsetY = 30;
+        rr(x, 70, 300, W - 140, 1020, 56);
+        let cg = x.createLinearGradient(0, 300, 0, 1320); cg.addColorStop(0, "#ffffff"); cg.addColorStop(1, "#e9e1ff");
+        x.fillStyle = cg; x.fill(); x.restore();
+
+        // علامة النجاح
+        x.beginPath(); x.arc(W / 2, 430, 68, 0, Math.PI * 2);
+        let og = x.createLinearGradient(0, 360, 0, 500); og.addColorStop(0, "#3ed89c"); og.addColorStop(1, "#14a06b");
+        x.fillStyle = og; x.fill();
+        x.strokeStyle = "#fff"; x.lineWidth = 15; x.lineCap = "round"; x.lineJoin = "round";
+        x.beginPath(); x.moveTo(W / 2 - 30, 432); x.lineTo(W / 2 - 8, 456); x.lineTo(W / 2 + 34, 406); x.stroke();
+
+        x.direction = "rtl"; x.textAlign = "center"; x.fillStyle = "#1b0a4d";
+        x.font = "900 60px " + F; x.fillText("تم اختصار رابطك بنجاح", W / 2, 590);
+        x.fillStyle = "#3a2d70"; x.font = "600 30px " + F; x.fillText("رابطك جاهز للمشاركة في أي مكان", W / 2, 640);
+
+        function block(label, value, y, mono) {
+          x.direction = "rtl"; x.textAlign = "right"; x.fillStyle = "#2b1a78"; x.font = "800 32px " + F;
+          x.fillText(label, W - 130, y);
+          rr(x, 120, y + 24, W - 240, 112, 26); x.fillStyle = "#fff"; x.fill();
+          x.strokeStyle = "rgba(139,108,240,.6)"; x.lineWidth = 3; x.stroke();
+          x.direction = "ltr"; x.textAlign = "center"; x.fillStyle = "#3a1c9f";
+          fitText(x, value, W - 300, 44, 800, mono ? "'Courier New', monospace" : F);
+          x.fillText(value, W / 2, y + 96);
+        }
+        block("الرابط المختصر", lastResult.short_url, 740, false);
+        block("رمز الاستعلام عن الإحصائيات", lastResult.analytics_code, 940, true);
+
+        // التعليمات
+        rr(x, 120, 1130, W - 240, 150, 28); x.fillStyle = "rgba(139,108,240,.14)"; x.fill();
+        x.setLineDash([12, 10]); x.strokeStyle = "rgba(91,47,208,.5)"; x.lineWidth = 2.5; x.stroke(); x.setLineDash([]);
+        x.direction = "rtl"; x.textAlign = "center"; x.fillStyle = "#2b1a78"; x.font = "800 30px " + F;
+        x.fillText("للاستعلام عن الإحصائيات استخدم من صفحة الاستعلام:", W / 2, 1190);
+        x.fillStyle = "#3a1c9f"; x.font = "700 29px " + F;
+        x.fillText("الرمز  •  الرابط الأصلي  •  الرابط المختصر", W / 2, 1243);
+
+        // تذييل
+        x.fillStyle = "rgba(255,255,255,.9)"; x.font = "700 30px " + F; x.direction = "rtl";
+        x.fillText("AQX .. اختصارٌ أذكى .. وصولٌ أسرع", W / 2, 1420);
+
+        cv.toBlob((blob) => {
+          if (!blob) { toast("تعذر إنشاء الصورة."); return; }
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url; a.download = "AQX-short-link.png"; a.rel = "noopener";
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 4000);
+          toast("تم حفظ الصورة على جهازك ✓");
+        }, "image/png");
+      }
+      $("saveImg").addEventListener("click", saveAsImage);
+
+      /* ================= قصاصات الاحتفال ================= */
+      let raf = 0;
+      function stopConfetti() { cancelAnimationFrame(raf); const c = $("confetti"); c.getContext("2d").clearRect(0, 0, c.width, c.height); }
+      function confetti() {
+        if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const cv = $("confetti"), ctx = cv.getContext("2d");
+        const r = cv.getBoundingClientRect(); cv.width = r.width; cv.height = r.height;
+        const cols = ["#6a3de0", "#8b6cf0", "#ffc83d", "#3ed89c", "#ff9a3c", "#4f8ff2", "#ffffff"];
+        const P = Array.from({ length: 90 }, () => ({
+          x: r.width / 2 + (Math.random() - .5) * 120, y: 120,
+          vx: (Math.random() - .5) * 11, vy: -Math.random() * 11 - 3,
+          s: 5 + Math.random() * 7, a: Math.random() * 6, va: (Math.random() - .5) * .4,
+          c: cols[(Math.random() * cols.length) | 0]
+        }));
+        let t0 = performance.now();
+        (function loop(t) {
+          const el = t - t0;
+          ctx.clearRect(0, 0, cv.width, cv.height);
+          P.forEach(p => {
+            p.vy += .32; p.x += p.vx; p.y += p.vy; p.a += p.va; p.vx *= .992;
+            ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a);
+            ctx.globalAlpha = Math.max(0, 1 - el / 3200);
+            ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); ctx.restore();
+          });
+          if (el < 3200) raf = requestAnimationFrame(loop); else ctx.clearRect(0, 0, cv.width, cv.height);
+        })(t0);
+      }
+
+      /* ================= قائمة الجوال + الأزرار العلوية ================= */
+      const nav = $("nav"), tg = $("navToggle");
+      tg.addEventListener("click", () => { const o = nav.classList.toggle("open"); tg.setAttribute("aria-expanded", o); });
+      function goShorten(e) { e.preventDefault(); clickSound(); $("shorten").scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(() => urlInput.focus({ preventScroll: true }), 450); }
+      $("topCta").addEventListener("click", goShorten);
+      $("startBtn").addEventListener("click", goShorten);
+
+      // صوت خفيف عند الضغط على الروابط والكروت
+      document.querySelectorAll(".card .more, nav a").forEach(a => a.addEventListener("click", () => clickSound()));
+
+      // منع بعض السلوكيات غير الضرورية (طبقة حماية بسيطة)
+      document.addEventListener("dragstart", (e) => { if (e.target.tagName === "IMG") e.preventDefault(); });
+    })();
   </script>
 </body>
 </html>
-
